@@ -1,0 +1,12 @@
+[SERVER]: User "artur" has joined
+
+[SERVER]: User "egor" has joined
+
+[artur]: hi there
+[egor]: hi
+[egor]: ok bye
+[artur]: bye
+[SERVER]: User "artur" left the chat
+
+[SERVER]: User "egor" left the chat
+
