@@ -1,7 +1,8 @@
 ﻿  Server.cpp
-C:\Users\mensh\OneDrive\Desktop\Exams\Server\Server\Server.cpp(63,61): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\mensh\OneDrive\Desktop\Exams\Server\Server\Server.cpp(69,74): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\mensh\OneDrive\Desktop\Exams\Server\Server\Server.cpp(86,63): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\mensh\OneDrive\Desktop\Exams\Server\Server\Server.cpp(100,74): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\mensh\OneDrive\Desktop\Exams\Server\Server\Server.cpp(121,72): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-  Server.vcxproj -> C:\Users\mensh\OneDrive\Desktop\Exams\Server\x64\Debug\Server.exe
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(69,63): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(82,61): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(88,74): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(105,63): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(119,74): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\Server\Server.cpp(140,72): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  Server.vcxproj -> C:\Users\mensh\OneDrive\Desktop\Lab17_Server-Client-main\Server\x64\Debug\Server.exe

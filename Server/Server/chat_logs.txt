@@ -10,3 +10,79 @@
 
 [SERVER]: User "egor" left the chat
 
+[SERVER]: User "artur" has joined
+
+[artur]: hi
+[SERVER]: User "artur" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user01" has joined
+
+[user01]: sam
+[user01]: asd
+[user01]: sosi ia sosi ia user01
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user02" has joined
+
+[SERVER]: User "user02" left the chat
+
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user02" has joined
+
+[user01]: hi
+[user02]: hi
+[user01]: what are you doing
+[user02]: i'm studdy
+[user02]: bye
+[SERVER]: User "user02" left the chat
+
+[user01]: bye
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "artur" has joined
+
+[SERVER]: User "artur" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user02" has joined
+
+[user02]: hi
+[SERVER]: User "user02" left the chat
+
+[user01]: bye
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "hi" has joined
+
+[hi]: what
+[SERVER]: User "hi" left the chat
+
+[SERVER]: User "user1" has joined
+
+[user1]: hi
+[SERVER]: User "user1" left the chat
+
+[SERVER]: User "user1" has joined
+
+[user1]: hi
+[SERVER]: User "user2" has joined
+
+[user2]: hi
+[SERVER]: User "user2" left the chat
+
+[SERVER]: User "user1" left the chat
+

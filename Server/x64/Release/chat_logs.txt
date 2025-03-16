@@ -1,0 +1,41 @@
+[SERVER]: User "user1" has joined
+
+[SERVER]: User "user2" has joined
+
+[user2]: hi
+[user1]: hi
+[user1]: my name is artur
+[user2]: sos
+[user2]: s
+[user1]: arutr
+[SERVER]: User "user1" left the chat
+
+[SERVER]: User "user1" has joined
+
+[SERVER]: User "user1" has joined
+
+[user1]: hi
+[user1]: hi
+[SERVER]: User "user1" left the chat
+
+[SERVER]: User "user1" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user01" left the chat
+
+[SERVER]: User "user01" has joined
+
+[SERVER]: User "user02" has joined
+
+[user02]: hi
+[user01]: hhi
+[user01]: ok
+[user01]: bye
+[user02]: bye
+[SERVER]: User "user02" left the chat
+
+[SERVER]: User "user01" left the chat
+

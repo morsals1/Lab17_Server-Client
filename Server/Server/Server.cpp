@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <winsock2.h>
+#include <ws2tcpip.h>
 #include <thread>
 #include <vector>
 #include <string>
@@ -42,15 +43,33 @@ void logMessage(const std::string& message) {
 void handleClient(SOCKET clientSocket) {
     char buffer[BUF_SIZE];
     int bytesReceived;
+    std::string username;
+    bool nameExists;
 
-    bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
-    if (bytesReceived <= 0) {
-        std::cerr << "Failed to receive username" << std::endl;
-        closesocket(clientSocket);
-        return;
-    }
-    buffer[bytesReceived] = '\0';
-    std::string username(buffer);
+    do {
+        bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+        if (bytesReceived <= 0) {
+            closesocket(clientSocket);
+            return;
+        }
+        buffer[bytesReceived] = '\0';
+        username = buffer;
+
+        std::lock_guard<std::mutex> lock(clientsMutex);
+        nameExists = false;
+        for (const auto& client : clients) {
+            if (client.username == username) {
+                nameExists = true;
+                break;
+            }
+        }
+
+        if (nameExists) {
+            std::string errorMsg = "[SERVER]: Username is already taken. Try another one.";
+            send(clientSocket, errorMsg.c_str(), errorMsg.size(), 0);
+        }
+
+    } while (nameExists);
 
     {
         std::lock_guard<std::mutex> lock(clientsMutex);
@@ -59,7 +78,7 @@ void handleClient(SOCKET clientSocket) {
 
     std::string joinMessage = "[SERVER]: User \"" + username + "\" has joined\n";
     std::cout << joinMessage;
-    logMessage(joinMessage);  // Log the join message
+    logMessage(joinMessage);
     send(clientSocket, joinMessage.c_str(), joinMessage.size(), 0);
 
     {
@@ -91,7 +110,7 @@ void handleClient(SOCKET clientSocket) {
         else {
             message = "[" + username + "]: " + message;
             std::cout << message;
-            logMessage(message);  // Log the user message
+            logMessage(message);
 
             {
                 std::lock_guard<std::mutex> lock(clientsMutex);
@@ -113,7 +132,7 @@ void handleClient(SOCKET clientSocket) {
 
     std::string leaveMessage = "[SERVER]: User \"" + username + "\" left the chat\n";
     std::cout << leaveMessage;
-    logMessage(leaveMessage);  // Log the leave message
+    logMessage(leaveMessage);
 
     {
         std::lock_guard<std::mutex> lock(clientsMutex);
@@ -124,6 +143,7 @@ void handleClient(SOCKET clientSocket) {
 
     closesocket(clientSocket);
 }
+
 
 void startServer(int port) {
     WSADATA wsaData;
@@ -161,7 +181,8 @@ void startServer(int port) {
         return;
     }
 
-    std::cout << "Server listening on port " << port << std::endl;
+    std::cout << "Server started. Use 'ipconfig' to find server IP.\n";
+    std::cout << "Listening on port " << port << std::endl;
 
     while (true) {
         clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddr, &clientAddrSize);
@@ -176,6 +197,7 @@ void startServer(int port) {
     closesocket(serverSocket);
     WSACleanup();
 }
+
 
 int main() {
     startServer(12345);

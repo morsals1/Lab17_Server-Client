@@ -6,7 +6,6 @@
 
 #pragma comment(lib, "Ws2_32.lib")
 
-#define SERVER_IP "127.0.0.1"
 #define PORT 12345
 
 void readMessages(SOCKET clientSocket) {
@@ -23,31 +22,54 @@ int main() {
     WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-    SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == INVALID_SOCKET) {
-        std::cerr << "Error creating socket!\n";
-        return 1;
-    }
-
+    SOCKET clientSocket;
     sockaddr_in serverAddr{};
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(PORT);
 
-    if (InetPton(AF_INET, TEXT(SERVER_IP), &serverAddr.sin_addr) != 1) {
-        std::cerr << "Invalid IP address format!\n";
-        return 1;
-    }
+    std::string serverIp;
+    bool connected = false;
 
-    if (connect(clientSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
-        std::cerr << "Connection failed!\n";
-        closesocket(clientSocket);
-        return 1;
+    while (!connected) {
+        std::cout << "Enter server IP: ";
+        std::getline(std::cin, serverIp);
+
+        if (InetPtonA(AF_INET, serverIp.c_str(), &serverAddr.sin_addr) != 1) {
+            std::cerr << "Invalid IP address format! Please enter again.\n";
+            continue;
+        }
+
+        clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+        if (clientSocket == INVALID_SOCKET) {
+            std::cerr << "Error creating socket!\n";
+            WSACleanup();
+            return 1;
+        }
+
+        if (connect(clientSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR) {
+            std::cerr << "Connection failed! Please enter a valid IP.\n";
+            closesocket(clientSocket);
+            continue;
+        }
+
+        connected = true;
     }
 
     std::string username;
-    std::cout << "Enter your username: ";
-    std::getline(std::cin, username);
-    send(clientSocket, username.c_str(), username.length(), 0);
+    char buffer[1024];
+    int bytesReceived;
+
+    do {
+        std::cout << "Enter your username: ";
+        std::getline(std::cin, username);
+        send(clientSocket, username.c_str(), username.length(), 0);
+
+        bytesReceived = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
+        if (bytesReceived > 0) {
+            buffer[bytesReceived] = '\0';
+            std::cout << buffer << std::endl;
+        }
+    } while (std::string(buffer).find("already taken") != std::string::npos);
 
     std::thread readerThread(readMessages, clientSocket);
 
